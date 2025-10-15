@@ -1,0 +1,26 @@
+# Main configuration file for WormVT training
+defaults:
+  - model: vt_former_small
+  - data: nih_ls
+  - training: pretrain
+  - _self_
+
+# Experiment settings
+experiment_name: vt_former_pretrain
+seed: 42
+output_dir: outputs/${experiment_name}
+
+# Hardware
+device: cuda
+precision: 16-mixed  # Use mixed precision training
+num_workers: 4
+
+# Logging
+log_every_n_steps: 50
+checkpoint_every_n_epochs: 5
+
+# Weights & Biases
+wandb:
+  project: wormvt
+  entity: null  # Set your W&B entity
+  mode: online  # online, offline, or disabled

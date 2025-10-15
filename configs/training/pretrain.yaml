@@ -1,0 +1,44 @@
+# VideoMAE-3D self-supervised pretraining configuration
+
+name: videomae_3d_pretrain
+
+# Training duration
+max_epochs: 100
+accumulate_grad_batches: 8  # Effective batch size = batch_size * accumulate
+
+# Optimizer
+optimizer:
+  name: adamw
+  lr: 1.5e-4
+  weight_decay: 0.05
+  betas: [0.9, 0.95]
+
+# Learning rate schedule
+lr_scheduler:
+  name: cosine
+  warmup_epochs: 10
+  min_lr: 1.0e-6
+
+# VideoMAE specific
+masking:
+  mask_ratio: 0.75          # Mask 75% of patches
+  mask_type: random         # 'random' or 'tube' (temporal tubes)
+
+# Loss
+loss:
+  name: mse                 # Mean squared error for reconstruction
+  normalize_target: true    # Normalize pixel values
+
+# Checkpointing
+save_top_k: 3
+monitor: val_loss
+mode: min
+
+# Early stopping
+early_stopping:
+  patience: 15
+  monitor: val_loss
+  mode: min
+
+# Gradient clipping
+gradient_clip_val: 1.0

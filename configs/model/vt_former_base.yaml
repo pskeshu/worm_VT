@@ -1,0 +1,27 @@
+# Base VT-Former for full training
+# ~300M parameters, recommended for pretraining
+
+name: vt_former_base
+
+# Input dimensions
+img_size: [512, 512, 100]  # H, W, D (full resolution)
+patch_size: [16, 16, 8]    # Spatial patch size
+in_channels: 1             # Grayscale fluorescence
+
+# Model architecture
+embed_dim: 768             # Hidden dimension
+depth: 12                  # Number of transformer blocks
+num_heads: 12              # Attention heads
+mlp_ratio: 4.0            # MLP expansion ratio
+
+# Temporal
+temporal_resolution: 32    # Max frames in one forward pass
+attention_type: divided    # 'divided' or 'joint'
+
+# Regularization
+dropout: 0.1
+attention_dropout: 0.1
+path_dropout: 0.1
+
+# Initialization
+init_std: 0.02

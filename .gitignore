@@ -1,0 +1,53 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Virtual Environment
+venv/
+env/
+ENV/
+
+# Training outputs
+outputs/
+checkpoints/
+wandb/
+*.ckpt
+*.pth
+
+# Logs
+*.log
+logs/
+
+# Data (don't commit large data files in root, but keep src/data/ code)
+/data/
+*.tif
+*.tiff
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Hydra
+.hydra/
+multirun/
+
+# Temporary files
+*.tmp
+*.bak

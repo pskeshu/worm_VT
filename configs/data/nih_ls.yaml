@@ -1,0 +1,40 @@
+# NIH-LS dataset configuration for pretraining
+
+name: nih_ls
+
+# Data paths (relative to project root)
+data_root: ../vlm_worm_test/nih-ls
+embryos:
+  - nih_diSPIM_deconv_1
+  # - nih_diSPIM_deconv_2  # Add more embryos if available
+  # - nih_diSPIM_deconv_3
+
+# Data loading
+batch_size: 2             # Small batch due to 3D+t memory requirements
+num_frames: 16            # Frames per clip
+frame_stride: 1           # Temporal sampling stride
+spatial_crop_size: [256, 256, 64]  # Random crop size
+
+# Train/val split
+train_ratio: 0.8
+val_ratio: 0.2
+shuffle: true
+
+# Augmentations
+augmentation:
+  # Spatial
+  random_flip_prob: 0.5
+  random_rotate_prob: 0.3
+  random_scale_range: [0.9, 1.1]
+
+  # Intensity
+  brightness_range: [0.8, 1.2]
+  contrast_range: [0.8, 1.2]
+  gamma_range: [0.8, 1.2]
+
+  # Noise
+  gaussian_noise_std: 0.01
+
+# Normalization (computed from dataset)
+normalize_mean: 0.0
+normalize_std: 1.0

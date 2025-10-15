@@ -1,0 +1,51 @@
+# Stage classification fine-tuning configuration
+
+name: stage_classification
+
+# Training duration
+max_epochs: 50
+accumulate_grad_batches: 2
+
+# Optimizer
+optimizer:
+  name: adamw
+  lr: 5.0e-5
+  weight_decay: 0.01
+  betas: [0.9, 0.999]
+
+# Learning rate schedule
+lr_scheduler:
+  name: cosine
+  warmup_epochs: 5
+  min_lr: 1.0e-7
+
+# Classification head
+num_classes: 10  # Number of developmental stages
+
+# Loss
+loss:
+  name: cross_entropy
+  label_smoothing: 0.1
+
+# Temporal consistency
+temporal_consistency:
+  enabled: true
+  weight: 0.1  # Weight for temporal consistency loss
+
+# Checkpointing
+save_top_k: 3
+monitor: val_accuracy
+mode: max
+
+# Early stopping
+early_stopping:
+  patience: 10
+  monitor: val_accuracy
+  mode: max
+
+# Gradient clipping
+gradient_clip_val: 1.0
+
+# Transfer learning
+freeze_encoder: false      # Whether to freeze pretrained encoder
+freeze_epochs: 0           # Epochs to keep encoder frozen

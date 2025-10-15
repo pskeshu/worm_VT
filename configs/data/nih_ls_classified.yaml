@@ -1,0 +1,42 @@
+# NIH-LS dataset with VLM classifications for fine-tuning
+
+name: nih_ls_classified
+
+# Data paths
+data_root: ../vlm_worm_test/nih-ls
+classification_file: ../vlm_worm_test/embryo_classifications_all.json
+
+# Data loading
+batch_size: 8             # Larger batch for single-frame classification
+num_frames: 1             # Single frame classification
+spatial_crop_size: [256, 256, 64]
+
+# Train/val/test split
+train_ratio: 0.7
+val_ratio: 0.15
+test_ratio: 0.15
+shuffle: true
+
+# Stage labels (from VLM classifications)
+stages:
+  - "1-cell"
+  - "2-cell"
+  - "4-cell"
+  - "8-cell"
+  - "early gastrulation"
+  - "late gastrulation"
+  - "comma"
+  - "1.5-fold"
+  - "2-fold"
+  - "3-fold"
+
+# Augmentations (lighter than pretraining)
+augmentation:
+  random_flip_prob: 0.3
+  random_rotate_prob: 0.2
+  brightness_range: [0.9, 1.1]
+  contrast_range: [0.9, 1.1]
+
+# Normalization
+normalize_mean: 0.0
+normalize_std: 1.0
